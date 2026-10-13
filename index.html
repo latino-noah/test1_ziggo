@@ -88,14 +88,27 @@
   @keyframes pulse{50%{box-shadow:0 0 0 10px rgba(34,197,94,0)}}
 
   /* LOGO MARQUEE */
-  .clients{padding:50px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
-  .clients p{text-align:center;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:28px}
-  .marquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
-  .marquee-track{display:flex;gap:28px;width:max-content;animation:scroll 40s linear infinite}
+  .clients{padding:90px 0 80px;background:linear-gradient(180deg,var(--bg-2),#fff);border-bottom:1px solid var(--line);overflow:hidden}
+  .clients .section-head{margin-bottom:44px}
+  .clients .section-head h2{font-size:clamp(34px,4vw,48px);margin:12px 0 0}
+  .marquee{--fade:120px;overflow:hidden;padding:10px 0;mask-image:linear-gradient(90deg,transparent,#000 var(--fade),#000 calc(100% - var(--fade)),transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 var(--fade),#000 calc(100% - var(--fade)),transparent)}
+  .marquee + .marquee{margin-top:14px}
+  .marquee-track{display:flex;width:max-content;animation:marquee var(--duration,40s) linear infinite;will-change:transform}
+  .marquee.reverse .marquee-track{animation-direction:reverse}
   .marquee:hover .marquee-track{animation-play-state:paused}
-  .marquee-track img{height:96px;width:96px;object-fit:contain;filter:grayscale(1);opacity:.7;transition:.3s;border-radius:14px;background:#fff}
-  .marquee-track img:hover{filter:none;opacity:1;transform:scale(1.06)}
-  @keyframes scroll{to{transform:translateX(-50%)}}
+  .logo-card{flex:none;width:180px;height:104px;margin-right:18px;background:#fff;border:1px solid var(--line);border-radius:18px;display:grid;place-items:center;padding:14px 22px;transition:transform .3s,box-shadow .3s,border-color .3s}
+  .logo-card img{max-width:100%;max-height:76px;object-fit:contain;filter:grayscale(1);opacity:.6;transition:.3s}
+  .logo-card{overflow:hidden;position:relative}
+  .logo-card.wide img{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:140px;height:140px;max-width:none;max-height:none}
+  .logo-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px -16px rgba(22,19,15,.3);border-color:var(--orange)}
+  .logo-card:hover img{filter:none;opacity:1}
+  @keyframes marquee{to{transform:translateX(calc(-1 * var(--shift,50%)))}}
+  @media (max-width:640px){
+    .marquee{--fade:40px}
+    .logo-card{width:132px;height:80px;margin-right:12px;padding:10px 14px}
+    .logo-card img{max-height:58px}
+    .logo-card.wide img{width:104px;height:104px}
+  }
 
   /* SERVICES */
   .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
@@ -291,20 +304,39 @@
 </section>
 
 <!-- KLANTEN -->
-<section class="clients">
-  <p>Merken die met ons op pad gingen</p>
+<section class="clients" id="klanten">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Onze opdrachtgevers</span>
+      <h2>Merken die met ons op pad gingen</h2>
+    </div>
+  </div>
   <div class="marquee">
-    <div class="marquee-track" id="logos">
-      <img src="logo/team-001.jpg" alt="Albert Heijn">
-      <img src="logo/team-002.jpg" alt="Jumbo">
-      <img src="logo/team-003.jpg" alt="The Pink Stuff">
-      <img src="logo/team-004.jpg" alt="ALDI">
-      <img src="logo/team-005.jpg" alt="McDonald's">
-      <img src="logo/team-006.jpg" alt="Luxor Theater Rotterdam">
-      <img src="logo/team-007.jpg" alt="Villa Thalia">
-      <img src="logo/team-008.jpg" alt="Rijnmond">
-      <img src="logo/team-009.jpg" alt="Domino's">
-      <img src="logo/team-010.jpg" alt="Flink">
+    <div class="marquee-track">
+        <div class="logo-card"><img src="logo/team-001.jpg" alt="Albert Heijn"></div>
+        <div class="logo-card wide"><img src="logo/team-002.jpg" alt="Jumbo"></div>
+        <div class="logo-card"><img src="logo/team-003.jpg" alt="The Pink Stuff"></div>
+        <div class="logo-card"><img src="logo/team-004.jpg" alt="ALDI"></div>
+        <div class="logo-card"><img src="logo/team-005.jpg" alt="McDonald's"></div>
+        <div class="logo-card wide"><img src="logo/team-006.jpg" alt="Luxor Theater Rotterdam"></div>
+        <div class="logo-card"><img src="logo/team-007.jpg" alt="Villa Thalia"></div>
+        <div class="logo-card wide"><img src="logo/team-008.jpg" alt="Rijnmond"></div>
+        <div class="logo-card"><img src="logo/team-009.jpg" alt="Domino's"></div>
+        <div class="logo-card wide"><img src="logo/team-010.jpg" alt="Flink"></div>
+    </div>
+  </div>
+  <div class="marquee reverse">
+    <div class="marquee-track">
+        <div class="logo-card wide"><img src="logo/team-006.jpg" alt="Luxor Theater Rotterdam"></div>
+        <div class="logo-card"><img src="logo/team-007.jpg" alt="Villa Thalia"></div>
+        <div class="logo-card wide"><img src="logo/team-008.jpg" alt="Rijnmond"></div>
+        <div class="logo-card"><img src="logo/team-009.jpg" alt="Domino's"></div>
+        <div class="logo-card wide"><img src="logo/team-010.jpg" alt="Flink"></div>
+        <div class="logo-card"><img src="logo/team-001.jpg" alt="Albert Heijn"></div>
+        <div class="logo-card wide"><img src="logo/team-002.jpg" alt="Jumbo"></div>
+        <div class="logo-card"><img src="logo/team-003.jpg" alt="The Pink Stuff"></div>
+        <div class="logo-card"><img src="logo/team-004.jpg" alt="ALDI"></div>
+        <div class="logo-card"><img src="logo/team-005.jpg" alt="McDonald's"></div>
     </div>
   </div>
 </section>
@@ -551,10 +583,28 @@
   burger.addEventListener('click', () => toggle(!menu.classList.contains('open')));
   menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggle(false)));
 
-  // Logo-marquee naadloos laten doorlopen
-  const track = document.getElementById('logos');
-  track.innerHTML += track.innerHTML;
-  [...track.children].slice(track.children.length / 2).forEach(i => i.setAttribute('aria-hidden', 'true'));
+  // Logo-marquee: oneindig doorlopen. Kopieer de set tot het scherm altijd gevuld is
+  // en schuif exact één setbreedte op, zodat de herhaling naadloos is.
+  const SPEED = 50; // pixels per seconde
+  const marquees = [...document.querySelectorAll('.marquee-track')].map(track => ({
+    track, set: [...track.children]
+  }));
+  const buildMarquees = () => marquees.forEach(({ track, set }) => {
+    track.replaceChildren(...set);
+    const setWidth = track.scrollWidth;
+    const copies = Math.ceil(innerWidth / setWidth) + 1;
+    for (let c = 0; c < copies; c++) set.forEach(el => {
+      const clone = el.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
+    });
+    track.style.setProperty('--shift', setWidth + 'px');
+    track.style.setProperty('--duration', setWidth / SPEED + 's');
+  });
+  let resizeTimer;
+  addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(buildMarquees, 150); });
+  addEventListener('load', buildMarquees);
+  buildMarquees();
 
   // Scroll-animaties
   const io = new IntersectionObserver(es => es.forEach(e => {
